@@ -15,10 +15,18 @@ const cors = require("cors");
 const port = 3000;
 app.use(cors());
 
+//Import Routes
 const usuariosRoutes = require('./routes/usuariosRoutes');
+const admsRoutes = require('./routes/admsRoutes');
+const aulasRoutes = require('./routes/aulasRoutes');
+const aulasPendentesRoutes = require('./routes/aulasPendentesRoutes');
 
+//Using Routes
 app.use(express.json());
 app.use('/usuarios', usuariosRoutes);
+app.use('/adms', admsRoutes);
+app.use('/aulas', aulasRoutes);
+app.use('/aulas', aulasPendentesRoutes);
 
 //configuração de uma rota para raiz ('/') da aplicação
 app.get('/', (req, res) => {
