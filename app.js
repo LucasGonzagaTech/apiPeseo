@@ -20,13 +20,19 @@ const usuariosRoutes = require('./routes/usuariosRoutes');
 const admsRoutes = require('./routes/admsRoutes');
 const aulasRoutes = require('./routes/aulasRoutes');
 const aulasPendentesRoutes = require('./routes/aulasPendentesRoutes');
+const disciplinasRoutes = require('./routes/disciplinasRoutes');
+const materiasRoutes = require('./routes/materiasRoutes');
+const tutoresRoutes = require('./routes/tutoresRoutes');
 
 //Using Routes
 app.use(express.json());
 app.use('/usuarios', usuariosRoutes);
 app.use('/adms', admsRoutes);
 app.use('/aulas', aulasRoutes);
-app.use('/aulas', aulasPendentesRoutes);
+app.use('/aulasPendentes', aulasPendentesRoutes);
+app.use('/disciplinas', disciplinasRoutes);
+app.use('/materias', materiasRoutes);
+app.use('/tutores', tutoresRoutes);
 
 //configuração de uma rota para raiz ('/') da aplicação
 app.get('/', (req, res) => {

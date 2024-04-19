@@ -17,8 +17,8 @@ router.post('/', (req, res) =>{
     const query = 'INSERT INTO tbAdms (idAdm, nome, idAulaPendente) VALUES (?,?,?)';
 
     dbConecta.query( query, [idAdm, nome, idAulaPendente], (err, result) =>{
-        if(err) {
-            res.status(500).json({message: 'Erro ao adicionar usuário.'});
+        if(err) { throw err;
+            // res.status(500).json({message: 'Erro ao adicionar usuário.'});
 
         }else {
             res.status(201).json({

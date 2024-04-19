@@ -5,7 +5,7 @@ const dbConecta = require ('../models/dbConexao');
 
 //GET
 router.get('/', (req, res) =>{
-    dbConecta.query('SELECT * FROM tbAdms', (err, result) =>{
+    dbConecta.query('SELECT * FROM tbTutores', (err, result) =>{
         if(err) throw err;
         res.json(result)
     })
@@ -13,10 +13,10 @@ router.get('/', (req, res) =>{
 
 //POST
 router.post('/', (req, res) =>{
-    const {idAdm, nome, idAulaPendente} = req.body;
-    const query = 'INSERT INTO tbAdms (idAdm, nome, idAulaPendente) VALUES (?,?,?)';
+    const {idTutor, idUsuario, nome, cpf, anoDeInicioCurso, anoDeConclusaoCurso} = req.body;
+    const query = 'INSERT INTO tbAdms (idTutor, idUsuario, nome, cpf, anoDeInicioCurso, anoDeConclusaoCurso) VALUES (?,?,?,?,?,?,?)';
 
-    dbConecta.query( query, [idAdm, nome, idAulaPendente], (err, result) =>{
+    dbConecta.query( query, [idTutor, idUsuario, nome, cpf, anoDeInicioCurso, anoDeConclusaoCurso], (err, result) =>{
         if(err) {
             res.status(500).json({message: 'Erro ao adicionar usuário.'});
 
@@ -33,7 +33,7 @@ router.post('/', (req, res) =>{
 //DELETE
 router.delete('/:id', (req, res) =>{
     const {id} = req.params;
-    const query = `DELETE FROM tbAdms WHERE idAdms = ?`;
+    const query = `DELETE FROM tbTutores WHERE idTutor = ?`;
 
     dbConecta.query(query, [id], (err, result) =>{
         if(err) {
@@ -50,10 +50,10 @@ router.delete('/:id', (req, res) =>{
 
 router.put('/:id', (req, res) => {
     const {id} = req.params;
-    const {nome,idAulaPendente} = req.body;
-    const queryn = `UPDATE tbAdms SET nome = ?, idAulaPendente = ? WHERE idAdm = ?`
+    const {idUsuario, nome, cpf, anoDeInicioCurso, anoDeConclusaoCurso} = req.body;
+    const queryn = `UPDATE tbTutores SET nome = ?, idAulaPendente = ? WHERE idAdm = ?`
 
-    dbConecta.query(queryn, [nome,idAulaPendente,id], (err, result)=>{
+    dbConecta.query(queryn, [idUsuario, nome, cpf, anoDeInicioCurso, anoDeConclusaoCurso,id], (err, result)=>{
         if (err) {
             res.status(500).json({message: 'Erro ao alterar informação do usuário.'});
         } else {
@@ -61,8 +61,11 @@ router.put('/:id', (req, res) => {
                 message: `Alteração aplicada`,
                 envio:{
                     id: id,
+                    idUsuario: idUsuario,
                     nome: nome,
-                    idAulaPendente: idAulaPendente,
+                    cpf: cpf,
+                    anoDeInicioCurso: anoDeInicioCurso,
+                    anoDeConclusaoCurso: anoDeConclusaoCurso
                 }
             })
         }

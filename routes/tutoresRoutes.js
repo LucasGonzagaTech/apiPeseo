@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const admsController = require('../controllers/admsController');
+const tutoresController = require('../controllers/tutoresController');
 
-router.use('/', admsController);
+router.use('/', tutoresController);
 
 module.exports =  router;

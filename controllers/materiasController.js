@@ -5,7 +5,7 @@ const dbConecta = require ('../models/dbConexao');
 
 //GET
 router.get('/', (req, res) =>{
-    dbConecta.query('SELECT * FROM tbAdms', (err, result) =>{
+    dbConecta.query('SELECT * FROM tbMaterias', (err, result) =>{
         if(err) throw err;
         res.json(result)
     })
@@ -13,10 +13,10 @@ router.get('/', (req, res) =>{
 
 //POST
 router.post('/', (req, res) =>{
-    const {idAdm, nome, idAulaPendente} = req.body;
-    const query = 'INSERT INTO tbAdms (idAdm, nome, idAulaPendente) VALUES (?,?,?)';
+    const {idMateria, nome, idDisciplina} = req.body;
+    const query = 'INSERT INTO tbMaterias (idMateria, nome, idDisciplina) VALUES (?,?,?)';
 
-    dbConecta.query( query, [idAdm, nome, idAulaPendente], (err, result) =>{
+    dbConecta.query( query, [idMateria, nome, idDisciplina], (err, result) =>{
         if(err) {
             res.status(500).json({message: 'Erro ao adicionar usuário.'});
 
@@ -50,7 +50,7 @@ router.delete('/:id', (req, res) =>{
 
 router.put('/:id', (req, res) => {
     const {id} = req.params;
-    const {nome,idAulaPendente} = req.body;
+    const {nome, idDisciplina} = req.body;
     const queryn = `UPDATE tbAdms SET nome = ?, idAulaPendente = ? WHERE idAdm = ?`
 
     dbConecta.query(queryn, [nome,idAulaPendente,id], (err, result)=>{
@@ -62,7 +62,7 @@ router.put('/:id', (req, res) => {
                 envio:{
                     id: id,
                     nome: nome,
-                    idAulaPendente: idAulaPendente,
+                    idDisciplina: idDisciplina,
                 }
             })
         }

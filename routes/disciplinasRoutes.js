@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const admsController = require('../controllers/admsController');
+const disciplinasController = require('../controllers/disciplinasController');
 
-router.use('/', admsController);
+router.use('/', disciplinasController);
 
 module.exports =  router;

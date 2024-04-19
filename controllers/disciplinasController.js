@@ -13,10 +13,10 @@ router.get('/', (req, res) =>{
 
 //POST
 router.post('/', (req, res) =>{
-    const {idAdm, nome, idAulaPendente} = req.body;
-    const query = 'INSERT INTO tbDisciplinas (idAdm, nome, idAulaPendente) VALUES (?,?,?)';
+    const {idDisciplina, idTutor, nomeTutor, materia, duracao, descricao} = req.body;
+    const query = 'INSERT INTO tbDisciplinas (idDisciplina, idTutor, nomeTutor, materia, duracao, descricao) VALUES (?,?,?,?,?,?)';
 
-    dbConecta.query( query, [idAdm, nome, idAulaPendente], (err, result) =>{
+    dbConecta.query( query, [idDisciplina, idTutor, nomeTutor, materia, duracao, descricao], (err, result) =>{
         if(err) {
             res.status(500).json({message: 'Erro ao adicionar usuário.'});
 
@@ -33,7 +33,7 @@ router.post('/', (req, res) =>{
 //DELETE
 router.delete('/:id', (req, res) =>{
     const {id} = req.params;
-    const query = `DELETE FROM tbAdms WHERE idAdms = ?`;
+    const query = `DELETE FROM tbDisciplinas WHERE idDisciplina = ?`;
 
     dbConecta.query(query, [id], (err, result) =>{
         if(err) {
@@ -50,10 +50,10 @@ router.delete('/:id', (req, res) =>{
 
 router.put('/:id', (req, res) => {
     const {id} = req.params;
-    const {nome,idAulaPendente} = req.body;
+    const {idTutor, nomeTutor, materia, duracao, descricao} = req.body;
     const queryn = `UPDATE tbAdms SET nome = ?, idAulaPendente = ? WHERE idAdm = ?`
 
-    dbConecta.query(queryn, [nome,idAulaPendente,id], (err, result)=>{
+    dbConecta.query(queryn, [idTutor, nomeTutor, materia, duracao, descricao,id], (err, result)=>{
         if (err) {
             res.status(500).json({message: 'Erro ao alterar informação do usuário.'});
         } else {
@@ -61,8 +61,11 @@ router.put('/:id', (req, res) => {
                 message: `Alteração aplicada`,
                 envio:{
                     id: id,
-                    nome: nome,
-                    idAulaPendente: idAulaPendente,
+                    idTutor: idTutor,
+                    nomeTutor: nomeTutor,
+                    materia: materia,
+                    duracao: duracao,
+                    descricao: descricao,
                 }
             })
         }
