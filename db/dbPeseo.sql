@@ -26,18 +26,15 @@ create table tbTutores(
     foreign key (idUsuario) references tbUsuarios(idUsuario)
 );
 
---tbTutores
-INSERT INTO tbTutores (idUsuario, nome, cpf, anoDeInicioCurso, anoDeConclusaoCurso)
-VALUES (1, 'teste1', '1199999','2015-12-17','2016-12-17');
 
 create table tbDisciplinas(
     idDisciplina int not null auto_increment,
     idTutor int not null,
     nomeTutor varchar(30) not null,
     materia varchar(50) not null,
-    duracao time not null,
-    capa blob,
-    pdf blob,
+    -- duracao time not null,
+    -- capa blob,
+    -- pdf blob,
     descricao varchar(250),
     primary key (idDisciplina),
     foreign key (idTutor) references tbTutores(idTutor)
@@ -45,8 +42,8 @@ create table tbDisciplinas(
 
 create table tbMaterias(
     idMateria int not null auto_increment,
-    nome varchar(50),
     idDisciplina int not null,
+    nome varchar(50),
     primary key(idMateria),
     foreign key (idDisciplina) references tbDisciplinas(idDisciplina)
 );
@@ -99,17 +96,11 @@ desc tbAdms;
 --Inserts
 
 --tbUsuarios
-INSERT INTO tbUsuarios (nome, email, tel )
-VALUES ('Teste', 'teste@teste.com', 11999999999);
+INSERT into tbUsuarios (nome, email, tel) VALUES ('Teste', 'Teste@teste.com', 11123456789);
 
-INSERT INTO tbUsuarios (nome, email, tel )
-VALUES ('Teste2', 'teste2@teste.com', 11899999999);
 
-INSERT INTO tbUsuarios (nome, email, tel )
-VALUES ('Teste3', 'teste3@teste.com', 11799999999);
+--tbTutores
+INSERT into tbTutores (idUsuario, nome, cpf, anoDeInicioCurso, anoDeConclusaoCurso) VALUES (1,'Teste','123456785-78','2015-12-17','2016-12-17');
 
-INSERT INTO tbUsuarios (nome, email, tel )
-VALUES ('Teste4', 'teste4@teste.com', 11699999999);
 
-INSERT INTO tbUsuarios (nome, email, tel )
-VALUES ('Teste5', 'teste5@teste.com', 11599999999);
+

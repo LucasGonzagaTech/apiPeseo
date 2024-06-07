@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const aulasPendentesController = require('../controllers/aulasController');
+const aulasPendentesController = require('../controllers/aulasPendentesContoller');
 
 router.use('/', aulasPendentesController);
 

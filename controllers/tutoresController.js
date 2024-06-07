@@ -14,15 +14,15 @@ router.get('/', (req, res) =>{
 //POST
 router.post('/', (req, res) =>{
     const {idTutor, idUsuario, nome, cpf, anoDeInicioCurso, anoDeConclusaoCurso} = req.body;
-    const query = 'INSERT INTO tbAdms (idTutor, idUsuario, nome, cpf, anoDeInicioCurso, anoDeConclusaoCurso) VALUES (?,?,?,?,?,?,?)';
+    const query = 'INSERT INTO tbTutores (idTutor, idUsuario, nome, cpf, anoDeInicioCurso, anoDeConclusaoCurso) VALUES (?,?,?,?,?,?)';
 
     dbConecta.query( query, [idTutor, idUsuario, nome, cpf, anoDeInicioCurso, anoDeConclusaoCurso], (err, result) =>{
         if(err) {
-            res.status(500).json({message: 'Erro ao adicionar usuário.'});
+            res.status(500).json({message: 'Erro ao adicionar tutor.'});
 
         }else {
             res.status(201).json({
-                message: 'Usuario adicionado!',
+                message: 'Tutor adicionado!',
                 idAdm: result.insertId,
                 body: req.body
             });

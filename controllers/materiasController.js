@@ -13,12 +13,12 @@ router.get('/', (req, res) =>{
 
 //POST
 router.post('/', (req, res) =>{
-    const {idMateria, nome, idDisciplina} = req.body;
-    const query = 'INSERT INTO tbMaterias (idMateria, nome, idDisciplina) VALUES (?,?,?)';
+    const {idMateria,idDisciplina,nome} = req.body;
+    const query = 'INSERT INTO tbMaterias (idMateria, idDisciplina, nome) VALUES (?,?,?)';
 
-    dbConecta.query( query, [idMateria, nome, idDisciplina], (err, result) =>{
+    dbConecta.query( query, [idMateria, idDisciplina, nome], (err, result) =>{
         if(err) {
-            res.status(500).json({message: 'Erro ao adicionar usuário.'});
+            res.status(500).json({message: 'Erro ao adicionar matéria.'});
 
         }else {
             res.status(201).json({
@@ -33,7 +33,7 @@ router.post('/', (req, res) =>{
 //DELETE
 router.delete('/:id', (req, res) =>{
     const {id} = req.params;
-    const query = `DELETE FROM tbAdms WHERE idAdms = ?`;
+    const query = `DELETE FROM tbMaterias WHERE idMateria = ?`;
 
     dbConecta.query(query, [id], (err, result) =>{
         if(err) {
@@ -51,7 +51,7 @@ router.delete('/:id', (req, res) =>{
 router.put('/:id', (req, res) => {
     const {id} = req.params;
     const {nome, idDisciplina} = req.body;
-    const queryn = `UPDATE tbAdms SET nome = ?, idAulaPendente = ? WHERE idAdm = ?`
+    const queryn = `UPDATE tbMaterias SET nome = ?, idAulaPendente = ? WHERE idAdm = ?`
 
     dbConecta.query(queryn, [nome,idAulaPendente,id], (err, result)=>{
         if (err) {
@@ -61,8 +61,9 @@ router.put('/:id', (req, res) => {
                 message: `Alteração aplicada`,
                 envio:{
                     id: id,
-                    nome: nome,
                     idDisciplina: idDisciplina,
+                    nome: nome
+                    
                 }
             })
         }

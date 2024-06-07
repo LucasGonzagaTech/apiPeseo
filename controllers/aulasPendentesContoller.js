@@ -14,11 +14,11 @@ router.get('/', (req, res) =>{
 //POST
 router.post('/', (req, res) =>{
     const {idAulaPendente, idTutor} = req.body;
-    const query = 'INSERT INTO tbAdms (idAulaPendente, idTutor) VALUES (?,?)';
+    const query = 'INSERT INTO tbAulasPendentes (idAulaPendente, idTutor) VALUES (?,?)';
 
     dbConecta.query( query, [idAulaPendente, idTutor], (err, result) =>{
         if(err) {
-            res.status(500).json({message: 'Erro ao adicionar usuário.'});
+            res.status(500).json({message: 'Erro ao adicionar AulaPendente.'});
 
         }else {
             res.status(201).json({
@@ -33,7 +33,7 @@ router.post('/', (req, res) =>{
 //DELETE
 router.delete('/:id', (req, res) =>{
     const {id} = req.params;
-    const query = `DELETE FROM tbAdms WHERE idAulaPendente = ?`;
+    const query = `DELETE FROM tbAulasPendentes WHERE idAulaPendente = ?`;
 
     dbConecta.query(query, [id], (err, result) =>{
         if(err) {
@@ -51,7 +51,7 @@ router.delete('/:id', (req, res) =>{
 router.put('/:id', (req, res) => {
     const {id} = req.params;
     const {idTutor} = req.body;
-    const queryn = `UPDATE tbAdms SET idTutor = ? WHERE idAulaPendente = ?`
+    const queryn = `UPDATE tbAulasPendentes SET idTutor = ? WHERE idAulaPendente = ?`
 
     dbConecta.query(queryn, [idTutor], (err, result)=>{
         if (err) {
