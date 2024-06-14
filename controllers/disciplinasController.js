@@ -51,7 +51,7 @@ router.delete('/:id', (req, res) =>{
 router.put('/:id', (req, res) => {
     const {id} = req.params;
     const {idTutor, nomeTutor, materia, descricao} = req.body;
-    const queryn = `UPDATE tbDisciplinas SET nome = ?, idAulaPendente = ? WHERE idAdm = ?`
+    const queryn = `UPDATE tbDisciplinas SET idTutor = ?, nomeTutor = ?,materia = ?, disciplina = ? WHERE idDisciplina = ?`
 
     dbConecta.query(queryn, [idTutor, nomeTutor, materia, descricao,id], (err, result)=>{
         if (err) {
